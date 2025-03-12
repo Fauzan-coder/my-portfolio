@@ -3,7 +3,12 @@ import { useFormik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
-const ContactSection = () => {
+interface ContactSectionProps {
+    scrollY: number;
+  }
+  
+
+const ContactSection : React.FC<ContactSectionProps> = ({ scrollY }) =>{
   const [submitted, setSubmitted] = useState(false);
   const { scrollYProgress } = useScroll();
 

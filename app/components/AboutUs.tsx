@@ -7,7 +7,11 @@ interface Skill {
   items: string[];
 }
 
-export default function EnhancedAboutSection() {
+interface EnhancedAboutSectionProps {
+    scrollY: number;
+}
+  
+export default function EnhancedAboutSection({ scrollY }: EnhancedAboutSectionProps) {
   const [mounted, setMounted] = useState(false);
   const [activeCard, setActiveCard] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
