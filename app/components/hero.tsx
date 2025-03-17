@@ -15,6 +15,7 @@ export default function DynamicHeroSection({ scrollY = 0 }: DynamicHeroSectionPr
     "Creative Developer",
     "Fullstack Engineer",
     "Web Craftsman",
+    "Freelancer"
   ];
 
   useEffect(() => {
@@ -27,17 +28,18 @@ export default function DynamicHeroSection({ scrollY = 0 }: DynamicHeroSectionPr
     }, 3000); // Change text every 3 seconds
     
     return () => clearInterval(textInterval);
-  }, []);
+  }, [roles.length]);
 
-  // Generate particles with improved variety
-  const particles = Array.from({ length: 20 }).map((_, index) => ({
+  // Generate particles with improved variety and enhanced glow
+  const particles = Array.from({ length: 30 }).map((_, index) => ({
     id: index,
-    size: 4 + (index % 8),
+    size: 4 + (index % 10),
     top: `${(index * 7) % 100}%`,
     left: `${(index * 13) % 100}%`,
-    duration: 15 + (index % 15),
+    duration: 15 + (index % 20),
     delay: index * 0.2,
-    opacity: 0.1 + (index % 5) * 0.02
+    opacity: 0.2 + (index % 5) * 0.04, // Increased base opacity
+    color: index % 3 === 0 ? 'rgba(186, 104, 200, 0.8)' : 'rgba(139, 92, 246, 0.8)' // Mix of purple shades
   }));
 
   // Animation variants for text elements
@@ -81,13 +83,13 @@ export default function DynamicHeroSection({ scrollY = 0 }: DynamicHeroSectionPr
   };
 
   return (
-    <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-transparent">
-      {/* Animated background with blur effect */}
-      <div className="absolute inset-0 z-0 bg-transparent">
+    <section className=" h-screen w-full flex items-center justify-center overflow-hidden bg-transparent relative">
+      {/* Animated background with enhanced blur and glow effect */}
+      <div className="absolute inset-0 z-0 bg-transparent"> 
         {mounted && particles.map((particle) => (
           <motion.div
             key={particle.id}
-            className="absolute rounded-full bg-green-500"
+            className="absolute rounded-full"
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: particle.opacity, scale: 1 }}
             transition={{ duration: 1.5, delay: particle.delay * 0.1 }}
@@ -96,25 +98,26 @@ export default function DynamicHeroSection({ scrollY = 0 }: DynamicHeroSectionPr
               height: `${particle.size}px`,
               top: particle.top,
               left: particle.left,
-              boxShadow: `0 0 ${particle.size * 2}px ${particle.size / 2}px rgba(74, 222, 128, 0.3)`,
+              backgroundColor: particle.color,
+              boxShadow: `0 0 ${particle.size * 3}px ${particle.size}px ${particle.color}`,
             }}
           />
         ))}
       </div>
       
-      {/* Animated gradient overlay */}
+      {/* Animated gradient overlay with slight glow */}
       <div 
-        className="absolute inset-0 z-1 opacity-60 bg-gradient-radial from-transparent via-transparent to-gray-900"
+        className="absolute inset-0 z-1 opacity-80 bg-gradient-radial from-transparent via-transparent to-black"
         style={{
           transform: mounted ? `translateY(${scrollY * 0.1}px)` : 'translateY(0px)',
         }}
       />
       
-      {/* 3D grid effect */}
-      <div className="absolute inset-0 z-1 opacity-10">
+      {/* 3D grid effect with enhanced glow */}
+      <div className="absolute inset-0 z-1 opacity-20">
         <div className="h-full w-full bg-grid-pattern" 
           style={{
-            backgroundImage: 'linear-gradient(to right, rgba(74, 222, 128, 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(74, 222, 128, 0.1) 1px, transparent 1px)',
+            backgroundImage: 'linear-gradient(to right, rgba(139, 92, 246, 0.3) 1px, transparent 1px), linear-gradient(to bottom, rgba(139, 92, 246, 0.3) 1px, transparent 1px)',
             backgroundSize: '40px 40px',
             transform: mounted ? `translateY(${scrollY * 0.05}px)` : 'translateY(0px)',
           }}
@@ -135,10 +138,10 @@ export default function DynamicHeroSection({ scrollY = 0 }: DynamicHeroSectionPr
           }}
         >
           <motion.h2 
-            className="text-xl md:text-2xl font-medium text-green-300 tracking-wider"
+            className="text-xl md:text-2xl font-medium text-purple-300 tracking-wider filter drop-shadow-lg"
             variants={itemVariants}
           >
-            Hello, I'm Fauzan
+            Hello, I&apos;m Fauzan
           </motion.h2>
           
           <div className="h-24 overflow-hidden">
@@ -150,17 +153,19 @@ export default function DynamicHeroSection({ scrollY = 0 }: DynamicHeroSectionPr
               exit="exit"
               variants={textVariants}
             >
-              <span className="bg-gradient-to-r from-green-400 via-emerald-500 to-teal-400 bg-clip-text text-transparent inline-block">
+              <span className="bg-gradient-to-r from-purple-500 via-violet-500 to-fuchsia-400 bg-clip-text text-transparent inline-block filter drop-shadow-xl" style={{
+                textShadow: '0 0 20px rgba(139, 92, 246, 0.8)'
+              }}>
                 {roles[currentTextIndex]}
               </span>
             </motion.h1>
           </div>
           
           <motion.p 
-            className="text-lg md:text-xl max-w-2xl text-gray-300 leading-relaxed"
+            className="text-lg md:text-xl max-w-2xl text-gray-300 leading-relaxed filter drop-shadow-md"
             variants={itemVariants}
           >
-            Building immersive digital experiences that blend creativity with technical excellence
+            Crafting stunning digital experiences that merge artistic vision with technical precision
           </motion.p>
           
           <motion.div 
@@ -169,9 +174,12 @@ export default function DynamicHeroSection({ scrollY = 0 }: DynamicHeroSectionPr
           >
             <motion.a 
               href="#projects" 
-              className="px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full font-medium text-white shadow-lg hover:shadow-green-500/40 transition-all duration-300 flex items-center"
+              className="px-8 py-4 bg-gradient-to-r from-purple-600 to-violet-700 rounded-full font-medium text-white shadow-xl hover:shadow-purple-500/60 transition-all duration-300 flex items-center"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
+              style={{
+                boxShadow: '0 0 25px rgba(139, 92, 246, 0.5)'
+              }}
             >
               View My Projects
               <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -181,9 +189,12 @@ export default function DynamicHeroSection({ scrollY = 0 }: DynamicHeroSectionPr
             
             <motion.a 
               href="#contact" 
-              className="px-8 py-4 border border-green-500/30 text-green-400 rounded-full font-medium hover:bg-green-500/10 transition-all duration-300"
+              className="px-8 py-4 border border-purple-500/50 text-purple-300 rounded-full font-medium hover:bg-purple-500/15 transition-all duration-300"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
+              style={{
+                boxShadow: '0 0 20px rgba(139, 92, 246, 0.3)'
+              }}
             >
               Get in Touch
             </motion.a>
@@ -191,7 +202,7 @@ export default function DynamicHeroSection({ scrollY = 0 }: DynamicHeroSectionPr
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator with enhanced glow */}
       <motion.div 
         className="absolute bottom-8 left-0 w-full flex justify-center"
         initial={{ opacity: 0, y: 20 }}
@@ -202,11 +213,18 @@ export default function DynamicHeroSection({ scrollY = 0 }: DynamicHeroSectionPr
         }}
       >
         <motion.div 
-          className="w-8 h-12 border-2 border-green-500/30 rounded-full flex justify-center p-2"
+          className="w-8 h-12 border-2 border-purple-500/50 rounded-full flex justify-center p-2"
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 1.5 }}
+          style={{
+            boxShadow: '0 0 15px rgba(139, 92, 246, 0.4)'
+          }}
         >
-          <div className="w-1 h-3 bg-green-500 rounded-full" />
+          <div className="w-1 h-3 bg-purple-400 rounded-full" 
+            style={{
+              boxShadow: '0 0 10px rgba(139, 92, 246, 0.9)'
+            }}
+          />
         </motion.div>
       </motion.div>
     </section>

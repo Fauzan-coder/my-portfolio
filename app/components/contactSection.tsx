@@ -3,12 +3,9 @@ import { useFormik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
-interface ContactSectionProps {
-    scrollY: number;
-  }
-  
 
-const ContactSection : React.FC<ContactSectionProps> = ({ scrollY }) =>{
+
+const ContactSection: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
   const { scrollYProgress } = useScroll();
 
@@ -29,11 +26,11 @@ const ContactSection : React.FC<ContactSectionProps> = ({ scrollY }) =>{
   // Only generate particles on the client side after component mounts
   useEffect(() => {
     setIsClient(true);
-    const particlePositions: Particle[] = Array.from({ length: 10 }, () => ({
+    const particlePositions: Particle[] = Array.from({ length: 15 }, () => ({
       width: Math.floor(Math.random() * 4) + 2,
       left: Math.floor(Math.random() * 100),
       top: Math.floor(Math.random() * 100),
-      opacity: (Math.random() * 0.2 + 0.1).toFixed(2),
+      opacity: (Math.random() * 0.3 + 0.1).toFixed(2),
       duration: Math.floor(Math.random() * 10 + 15),
     }));
     setParticles(particlePositions);
@@ -87,9 +84,9 @@ const ContactSection : React.FC<ContactSectionProps> = ({ scrollY }) =>{
     },
   });
 
-  // Reduced animation complexity for better performance
+  // Enhanced animation for better visual appeal
   const inputVariants = {
-    focus: { y: -3, boxShadow: '0 5px 15px -5px rgba(16, 185, 129, 0.2)' },
+    focus: { y: -3, boxShadow: '0 5px 20px -5px rgba(139, 92, 246, 0.4)' },
     blur: { y: 0, boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' },
   };
 
@@ -118,35 +115,35 @@ const ContactSection : React.FC<ContactSectionProps> = ({ scrollY }) =>{
   };
 
   return (
-    <section id="contact" className="py-32 relative overflow-hidden min-h-screen flex items-center">
-      {/* Simplified gradient background with reduced motion */}
+    <section id="contact" className="py-32 relative overflow-hidden min-h-screen flex items-center bg-transparent">
+      {/* Enhanced gradient background with purple glow */}
       <motion.div
-        className="absolute top-0 right-0 w-1/2 h-full opacity-10"
+        className="absolute top-0 right-0 w-1/2 h-full opacity-15"
         style={{
-          background: 'radial-gradient(ellipse at center, rgba(16, 185, 129, 1) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse at center, rgba(139, 92, 246, 0.8) 0%, transparent 70%)',
           y: backgroundY,
         }}
       />
 
-      {/* Static grid pattern - no animation to reduce overhead */}
-      <div className="absolute inset-0 z-0 opacity-5">
+      {/* Stylized grid pattern with purple lines */}
+      <div className="absolute inset-0 z-0 opacity-10">
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `linear-gradient(rgba(16, 185, 129, 0.1) 1px, transparent 1px), 
-                             linear-gradient(90deg, rgba(16, 185, 129, 0.1) 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(rgba(139, 92, 246, 0.2) 1px, transparent 1px), 
+                             linear-gradient(90deg, rgba(139, 92, 246, 0.2) 1px, transparent 1px)`,
             backgroundSize: '30px 30px',
             backgroundPosition: 'center center',
           }}
         />
       </div>
 
-      {/* Only render particles on the client side */}
+      {/* Enhanced particles with purple color */}
       {isClient &&
         particles.map((particle, i) => (
           <div
             key={i}
-            className="absolute rounded-full bg-green-500"
+            className="absolute rounded-full bg-purple-500"
             style={{
               width: `${particle.width}px`,
               height: `${particle.width}px`,
@@ -166,7 +163,7 @@ const ContactSection : React.FC<ContactSectionProps> = ({ scrollY }) =>{
           transition={{ duration: 0.5 }}
           viewport={{ once: true, margin: '-50px' }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-16 bg-gradient-to-r from-green-400 to-emerald-600 bg-clip-text text-transparent inline-block">
+          <h2 className="text-4xl md:text-5xl font-bold mb-16 bg-gradient-to-r from-purple-400 to-violet-600 bg-clip-text text-transparent inline-block">
             Get In Touch
           </h2>
 
@@ -179,7 +176,7 @@ const ContactSection : React.FC<ContactSectionProps> = ({ scrollY }) =>{
               viewport={{ once: true }}
             >
               <p className="text-gray-300 mb-8 text-lg leading-relaxed">
-                Interested in working together? I'm always open to discussing new projects, creative ideas or
+                Interested in working together? I&apos;m always open to discussing new projects, creative ideas or
                 opportunities to be part of your vision.
               </p>
 
@@ -191,9 +188,9 @@ const ContactSection : React.FC<ContactSectionProps> = ({ scrollY }) =>{
                 viewport={{ once: true }}
               >
                 <motion.div className="flex items-center group" variants={itemVariants}>
-                  <div className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center mr-5 group-hover:bg-green-500 transition-colors duration-300">
+                  <div className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center mr-5 group-hover:bg-purple-600 transition-colors duration-300">
                     <svg
-                      className="w-5 h-5 text-green-500 group-hover:text-white transition-colors duration-300"
+                      className="w-5 h-5 text-purple-500 group-hover:text-white transition-colors duration-300"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                       xmlns="http://www.w3.org/2000/svg"
@@ -202,15 +199,15 @@ const ContactSection : React.FC<ContactSectionProps> = ({ scrollY }) =>{
                       <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
                     </svg>
                   </div>
-                  <span className="text-gray-300 text-lg group-hover:text-green-400 transition-colors duration-300">
+                  <span className="text-gray-300 text-lg group-hover:text-purple-400 transition-colors duration-300">
                     fauzangolawala164@gmail.com
                   </span>
                 </motion.div>
 
                 <motion.div className="flex items-center group" variants={itemVariants}>
-                  <div className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center mr-5 group-hover:bg-green-500 transition-colors duration-300">
+                  <div className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center mr-5 group-hover:bg-purple-600 transition-colors duration-300">
                     <svg
-                      className="w-5 h-5 text-green-500 group-hover:text-white transition-colors duration-300"
+                      className="w-5 h-5 text-purple-500 group-hover:text-white transition-colors duration-300"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                       xmlns="http://www.w3.org/2000/svg"
@@ -222,7 +219,7 @@ const ContactSection : React.FC<ContactSectionProps> = ({ scrollY }) =>{
                       ></path>
                     </svg>
                   </div>
-                  <span className="text-gray-300 text-lg group-hover:text-green-400 transition-colors duration-300">
+                  <span className="text-gray-300 text-lg group-hover:text-purple-400 transition-colors duration-300">
                     India
                   </span>
                 </motion.div>
@@ -233,7 +230,7 @@ const ContactSection : React.FC<ContactSectionProps> = ({ scrollY }) =>{
                   href="https://github.com/Fauzan-coder"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-green-500 transition-colors duration-300"
+                  className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-purple-600 transition-colors duration-300 hover:shadow-lg hover:shadow-purple-500/30"
                 >
                   <svg
                     className="w-5 h-5"
@@ -249,7 +246,7 @@ const ContactSection : React.FC<ContactSectionProps> = ({ scrollY }) =>{
                   href="https://www.linkedin.com/in/fauzangolawala164/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-green-500 transition-colors duration-300"
+                  className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-purple-600 transition-colors duration-300 hover:shadow-lg hover:shadow-purple-500/30"
                 >
                   <svg
                     className="w-5 h-5"
@@ -263,7 +260,7 @@ const ContactSection : React.FC<ContactSectionProps> = ({ scrollY }) =>{
               </div>
             </motion.div>
 
-            {/* Right column with contact form */}
+            {/* Right column with contact form - enhanced with purple accents */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -272,26 +269,30 @@ const ContactSection : React.FC<ContactSectionProps> = ({ scrollY }) =>{
             >
               <motion.form
                 onSubmit={formik.handleSubmit}
-                className="bg-gray-800/80 backdrop-blur-sm rounded-xl p-8 relative overflow-hidden hover:shadow-lg hover:shadow-green-500/10 transition-all duration-500"
+                className="bg-gray-900/90 backdrop-blur-sm rounded-xl p-8 relative overflow-hidden hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-500 border border-gray-800"
                 variants={containerVariants}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
               >
-                {/* Simplified form background */}
-                <div className="absolute inset-0 opacity-0 hover:opacity-10 transition-opacity duration-700 rounded-xl overflow-hidden pointer-events-none bg-gradient-to-r from-green-500/10 to-transparent" />
+                {/* Enhanced form background with subtle purple glow */}
+                <div className="absolute inset-0 opacity-0 hover:opacity-20 transition-opacity duration-700 rounded-xl overflow-hidden pointer-events-none bg-gradient-to-r from-purple-600/20 to-violet-800/10" />
+                
+                {/* Decorative corner element */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-b from-purple-500/10 to-transparent rounded-bl-full transform -translate-y-1/2 translate-x-1/2"></div>
+                <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-t from-purple-700/10 to-transparent rounded-tr-full transform translate-y-1/2 -translate-x-1/2"></div>
 
                 {/* Success message */}
                 {submitted && (
                   <motion.div
-                    className="absolute inset-0 bg-gray-800/95 backdrop-blur-sm flex items-center justify-center rounded-xl z-10"
+                    className="absolute inset-0 bg-gray-900/95 backdrop-blur-sm flex items-center justify-center rounded-xl z-10"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                   >
                     <div className="text-center p-6">
-                      <div className="w-16 h-16 rounded-full bg-green-500/20 mx-auto flex items-center justify-center mb-4">
+                      <div className="w-16 h-16 rounded-full bg-purple-500/20 mx-auto flex items-center justify-center mb-4">
                         <svg
-                          className="w-8 h-8 text-green-500"
+                          className="w-8 h-8 text-purple-500"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -300,8 +301,8 @@ const ContactSection : React.FC<ContactSectionProps> = ({ scrollY }) =>{
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                       </div>
-                      <h3 className="text-xl font-medium text-green-500 mb-2">Message Sent!</h3>
-                      <p className="text-gray-400">Thank you for reaching out. I'll get back to you soon.</p>
+                      <h3 className="text-xl font-medium text-purple-500 mb-2">Message Sent!</h3>
+                      <p className="text-gray-400">Thank you for reaching out. I&apos;ll get back to you soon.</p>
                     </div>
                   </motion.div>
                 )}
@@ -317,10 +318,10 @@ const ContactSection : React.FC<ContactSectionProps> = ({ scrollY }) =>{
                     value={formik.values.name}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    className={`w-full px-4 py-3 rounded-lg bg-gray-700/70 border ${
+                    className={`w-full px-4 py-3 rounded-lg bg-gray-800/70 border ${
                       formik.touched.name && formik.errors.name
                         ? 'border-red-500 focus:ring-red-500'
-                        : 'border-gray-600 focus:ring-green-500'
+                        : 'border-gray-700 focus:ring-purple-500'
                     } text-white focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-300`}
                     variants={inputVariants}
                     whileFocus="focus"
@@ -342,10 +343,10 @@ const ContactSection : React.FC<ContactSectionProps> = ({ scrollY }) =>{
                     value={formik.values.email}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    className={`w-full px-4 py-3 rounded-lg bg-gray-700/70 border ${
+                    className={`w-full px-4 py-3 rounded-lg bg-gray-800/70 border ${
                       formik.touched.email && formik.errors.email
                         ? 'border-red-500 focus:ring-red-500'
-                        : 'border-gray-600 focus:ring-green-500'
+                        : 'border-gray-700 focus:ring-purple-500'
                     } text-white focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-300`}
                     variants={inputVariants}
                     whileFocus="focus"
@@ -367,10 +368,10 @@ const ContactSection : React.FC<ContactSectionProps> = ({ scrollY }) =>{
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     rows={5}
-                    className={`w-full px-4 py-3 rounded-lg bg-gray-700/70 border ${
+                    className={`w-full px-4 py-3 rounded-lg bg-gray-800/70 border ${
                       formik.touched.message && formik.errors.message
                         ? 'border-red-500 focus:ring-red-500'
-                        : 'border-gray-600 focus:ring-green-500'
+                        : 'border-gray-700 focus:ring-purple-500'
                     } text-white focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-300`}
                     variants={inputVariants}
                     whileFocus="focus"
@@ -383,7 +384,7 @@ const ContactSection : React.FC<ContactSectionProps> = ({ scrollY }) =>{
 
                 <motion.button
                   type="submit"
-                  className="w-full py-3 px-4 bg-gradient-to-r from-green-500 to-emerald-700 rounded-lg text-white font-medium transition-all relative overflow-hidden shadow-lg"
+                  className="w-full py-3 px-4 bg-gradient-to-r from-purple-600 to-violet-800 rounded-lg text-white font-medium transition-all relative overflow-hidden shadow-lg hover:shadow-purple-500/20"
                   variants={itemVariants}
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.98 }}
