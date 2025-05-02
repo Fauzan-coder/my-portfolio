@@ -1,47 +1,10 @@
-import { useState, useEffect } from 'react';
-import { useFormik, FormikHelpers } from 'formik';
+import { useState } from 'react';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 
-
-
-const ContactSection: React.FC = () => {
+const ContactSection = () => {
   const [submitted, setSubmitted] = useState(false);
-  const { scrollYProgress } = useScroll();
-
-  interface Particle {
-    width: number;
-    left: number;
-    top: number;
-    opacity: string;
-    duration: number;
-  }
-
-  const [particles, setParticles] = useState<Particle[]>([]);
-  const [isClient, setIsClient] = useState(false);
-
-  // Reduce the number of transform operations - only use what's necessary
-  const backgroundY = useTransform(scrollYProgress, [0, 1], [0, 100]);
-
-  // Only generate particles on the client side after component mounts
-  useEffect(() => {
-    setIsClient(true);
-    const particlePositions: Particle[] = Array.from({ length: 15 }, () => ({
-      width: Math.floor(Math.random() * 4) + 2,
-      left: Math.floor(Math.random() * 100),
-      top: Math.floor(Math.random() * 100),
-      opacity: (Math.random() * 0.3 + 0.1).toFixed(2),
-      duration: Math.floor(Math.random() * 10 + 15),
-    }));
-    setParticles(particlePositions);
-  }, []);
-
-  // Define the shape of form values
-  interface FormValues {
-    name: string;
-    email: string;
-    message: string;
-  }
 
   // Form validation schema
   const validationSchema = Yup.object({
@@ -51,14 +14,14 @@ const ContactSection: React.FC = () => {
   });
 
   // Handle form submission
-  const formik = useFormik<FormValues>({
+  const formik = useFormik({
     initialValues: {
       name: '',
       email: '',
       message: '',
     },
     validationSchema,
-    onSubmit: async (values: FormValues, { resetForm }: FormikHelpers<FormValues>) => {
+    onSubmit: async (values, { resetForm }) => {
       try {
         // Send email using the Next.js API route
         const response = await fetch('/api/send-email', {
@@ -84,13 +47,7 @@ const ContactSection: React.FC = () => {
     },
   });
 
-  // Enhanced animation for better visual appeal
-  const inputVariants = {
-    focus: { y: -3, boxShadow: '0 5px 20px -5px rgba(139, 92, 246, 0.4)' },
-    blur: { y: 0, boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' },
-  };
-
-  // Simpler container animation
+  // Animations for elements
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -101,7 +58,6 @@ const ContactSection: React.FC = () => {
     },
   };
 
-  // Optimized item animations with reduced spring stiffness
   const itemVariants = {
     hidden: { y: 10, opacity: 0 },
     visible: {
@@ -115,46 +71,22 @@ const ContactSection: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-32 relative overflow-hidden min-h-screen flex items-center bg-transparent">
-      {/* Enhanced gradient background with purple glow */}
-      <motion.div
-        className="absolute top-0 right-0 w-1/2 h-full opacity-15"
-        style={{
-          background: 'radial-gradient(ellipse at center, rgba(139, 92, 246, 0.8) 0%, transparent 70%)',
-          y: backgroundY,
-        }}
-      />
-
-      {/* Stylized grid pattern with purple lines */}
-      <div className="absolute inset-0 z-0 opacity-10">
+    <section id="contact" className="py-24 relative overflow-hidden min-h-screen flex items-center bg-white">
+      {/* Subtle background gradient */}
+      <div className="absolute inset-0 bg-white  z-0" />
+      
+      {/* Subtle grid pattern */}
+      <div className="absolute inset-0 z-0 opacity-5">
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `linear-gradient(rgba(139, 92, 246, 0.2) 1px, transparent 1px), 
-                             linear-gradient(90deg, rgba(139, 92, 246, 0.2) 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px), 
+                             linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px)`,
             backgroundSize: '30px 30px',
             backgroundPosition: 'center center',
           }}
         />
       </div>
-
-      {/* Enhanced particles with purple color */}
-      {isClient &&
-        particles.map((particle, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full bg-purple-500"
-            style={{
-              width: `${particle.width}px`,
-              height: `${particle.width}px`,
-              left: `${particle.left}%`,
-              top: `${particle.top}%`,
-              opacity: particle.opacity,
-              filter: 'blur(1px)',
-              animation: `float ${particle.duration}s linear infinite`,
-            }}
-          />
-        ))}
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
@@ -162,10 +94,13 @@ const ContactSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true, margin: '-50px' }}
+          className="max-w-6xl mx-auto"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-16 bg-gradient-to-r from-purple-400 to-violet-600 bg-clip-text text-transparent inline-block">
-            Get In Touch
-          </h2>
+          <h1 className="text-5xl md:text-7xl font-medium mb-12 font-['Anton'] relative">
+          <span className="bg-gradient-to-r from-black via-gray-500 to-gray-900 bg-clip-text text-transparent drop-shadow-lg animate-pulse">
+            Get in Touch
+          </span>
+        </h1>
 
           <div className="grid md:grid-cols-2 gap-16">
             {/* Left column with contact info */}
@@ -174,23 +109,23 @@ const ContactSection: React.FC = () => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.4 }}
               viewport={{ once: true }}
+              className="flex flex-col justify-center"
             >
-              <p className="text-gray-300 mb-8 text-lg leading-relaxed">
-                Interested in working together? I&apos;m always open to discussing new projects, creative ideas or
-                opportunities to be part of your vision.
+              <p className="text-gray-600 mb-10 text-lg leading-relaxed">
+                Interested in working together? I&apos;m always open to discussing new projects, creative ideas or opportunities to be part of your vision.
               </p>
 
               <motion.div
-                className="space-y-6"
+                className="space-y-8"
                 variants={containerVariants}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
               >
                 <motion.div className="flex items-center group" variants={itemVariants}>
-                  <div className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center mr-5 group-hover:bg-purple-600 transition-colors duration-300">
+                  <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mr-5 group-hover:bg-gray-200 transition-colors duration-300 shadow-sm">
                     <svg
-                      className="w-5 h-5 text-purple-500 group-hover:text-white transition-colors duration-300"
+                      className="w-5 h-5 text-gray-700"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                       xmlns="http://www.w3.org/2000/svg"
@@ -199,15 +134,15 @@ const ContactSection: React.FC = () => {
                       <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
                     </svg>
                   </div>
-                  <span className="text-gray-300 text-lg group-hover:text-purple-400 transition-colors duration-300">
+                  <span className="text-gray-700 text-lg group-hover:text-black transition-colors duration-300">
                     fauzangolawala164@gmail.com
                   </span>
                 </motion.div>
 
                 <motion.div className="flex items-center group" variants={itemVariants}>
-                  <div className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center mr-5 group-hover:bg-purple-600 transition-colors duration-300">
+                  <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mr-5 group-hover:bg-gray-200 transition-colors duration-300 shadow-sm">
                     <svg
-                      className="w-5 h-5 text-purple-500 group-hover:text-white transition-colors duration-300"
+                      className="w-5 h-5 text-gray-700"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                       xmlns="http://www.w3.org/2000/svg"
@@ -219,7 +154,7 @@ const ContactSection: React.FC = () => {
                       ></path>
                     </svg>
                   </div>
-                  <span className="text-gray-300 text-lg group-hover:text-purple-400 transition-colors duration-300">
+                  <span className="text-gray-700 text-lg group-hover:text-black transition-colors duration-300">
                     India
                   </span>
                 </motion.div>
@@ -230,10 +165,10 @@ const ContactSection: React.FC = () => {
                   href="https://github.com/Fauzan-coder"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-purple-600 transition-colors duration-300 hover:shadow-lg hover:shadow-purple-500/30"
+                  className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors duration-300 shadow-sm"
                 >
                   <svg
-                    className="w-5 h-5"
+                    className="w-5 h-5 text-gray-700"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
@@ -246,10 +181,10 @@ const ContactSection: React.FC = () => {
                   href="https://www.linkedin.com/in/fauzangolawala164/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-purple-600 transition-colors duration-300 hover:shadow-lg hover:shadow-purple-500/30"
+                  className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors duration-300 shadow-sm"
                 >
                   <svg
-                    className="w-5 h-5"
+                    className="w-5 h-5 text-gray-700"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
@@ -260,7 +195,7 @@ const ContactSection: React.FC = () => {
               </div>
             </motion.div>
 
-            {/* Right column with contact form - enhanced with purple accents */}
+            {/* Right column with contact form */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -269,30 +204,30 @@ const ContactSection: React.FC = () => {
             >
               <motion.form
                 onSubmit={formik.handleSubmit}
-                className="bg-gray-900/90 backdrop-blur-sm rounded-xl p-8 relative overflow-hidden hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-500 border border-gray-800"
+                className="bg-white rounded-2xl p-8 relative overflow-hidden transition-all duration-500 border border-gray-200 shadow-lg"
                 variants={containerVariants}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
               >
-                {/* Enhanced form background with subtle purple glow */}
-                <div className="absolute inset-0 opacity-0 hover:opacity-20 transition-opacity duration-700 rounded-xl overflow-hidden pointer-events-none bg-gradient-to-r from-purple-600/20 to-violet-800/10" />
+                {/* Subtle background gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-50 -z-10" />
                 
-                {/* Decorative corner element */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-b from-purple-500/10 to-transparent rounded-bl-full transform -translate-y-1/2 translate-x-1/2"></div>
-                <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-t from-purple-700/10 to-transparent rounded-tr-full transform translate-y-1/2 -translate-x-1/2"></div>
+                {/* Decorative elements */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-b from-gray-100 to-transparent rounded-bl-full transform -translate-y-1/2 translate-x-1/2 -z-5"></div>
+                <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-t from-gray-100 to-transparent rounded-tr-full transform translate-y-1/2 -translate-x-1/2 -z-5"></div>
 
                 {/* Success message */}
                 {submitted && (
                   <motion.div
-                    className="absolute inset-0 bg-gray-900/95 backdrop-blur-sm flex items-center justify-center rounded-xl z-10"
+                    className="absolute inset-0 bg-white/95 backdrop-blur-sm flex items-center justify-center rounded-2xl z-10"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                   >
                     <div className="text-center p-6">
-                      <div className="w-16 h-16 rounded-full bg-purple-500/20 mx-auto flex items-center justify-center mb-4">
+                      <div className="w-16 h-16 rounded-full bg-gray-100 mx-auto flex items-center justify-center mb-4">
                         <svg
-                          className="w-8 h-8 text-purple-500"
+                          className="w-8 h-8 text-gray-700"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -301,14 +236,14 @@ const ContactSection: React.FC = () => {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                       </div>
-                      <h3 className="text-xl font-medium text-purple-500 mb-2">Message Sent!</h3>
-                      <p className="text-gray-400">Thank you for reaching out. I&apos;ll get back to you soon.</p>
+                      <h3 className="text-xl font-medium text-gray-900 mb-2">Message Sent!</h3>
+                      <p className="text-gray-600">Thank you for reaching out. I&apos;ll get back to you soon.</p>
                     </div>
                   </motion.div>
                 )}
 
                 <motion.div className="mb-6" variants={itemVariants}>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-2">
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
                     Name
                   </label>
                   <motion.input
@@ -318,14 +253,12 @@ const ContactSection: React.FC = () => {
                     value={formik.values.name}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    className={`w-full px-4 py-3 rounded-lg bg-gray-800/70 border ${
+                    className={`w-full px-4 py-3 rounded-xl bg-gray-50 border ${
                       formik.touched.name && formik.errors.name
-                        ? 'border-red-500 focus:ring-red-500'
-                        : 'border-gray-700 focus:ring-purple-500'
-                    } text-white focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-300`}
-                    variants={inputVariants}
-                    whileFocus="focus"
-                    initial="blur"
+                        ? 'border-red-400 focus:ring-red-300'
+                        : 'border-gray-200 focus:ring-gray-300'
+                    } text-gray-900 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-300`}
+                    whileFocus={{ scale: 1.005 }}
                   />
                   {formik.touched.name && formik.errors.name && (
                     <p className="mt-1 text-sm text-red-500">{formik.errors.name}</p>
@@ -333,7 +266,7 @@ const ContactSection: React.FC = () => {
                 </motion.div>
 
                 <motion.div className="mb-6" variants={itemVariants}>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-2">
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                     Email
                   </label>
                   <motion.input
@@ -343,14 +276,12 @@ const ContactSection: React.FC = () => {
                     value={formik.values.email}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    className={`w-full px-4 py-3 rounded-lg bg-gray-800/70 border ${
+                    className={`w-full px-4 py-3 rounded-xl bg-gray-50 border ${
                       formik.touched.email && formik.errors.email
-                        ? 'border-red-500 focus:ring-red-500'
-                        : 'border-gray-700 focus:ring-purple-500'
-                    } text-white focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-300`}
-                    variants={inputVariants}
-                    whileFocus="focus"
-                    initial="blur"
+                        ? 'border-red-400 focus:ring-red-300'
+                        : 'border-gray-200 focus:ring-gray-300'
+                    } text-gray-900 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-300`}
+                    whileFocus={{ scale: 1.005 }}
                   />
                   {formik.touched.email && formik.errors.email && (
                     <p className="mt-1 text-sm text-red-500">{formik.errors.email}</p>
@@ -358,7 +289,7 @@ const ContactSection: React.FC = () => {
                 </motion.div>
 
                 <motion.div className="mb-6" variants={itemVariants}>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-400 mb-2">
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
                     Message
                   </label>
                   <motion.textarea
@@ -368,14 +299,12 @@ const ContactSection: React.FC = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     rows={5}
-                    className={`w-full px-4 py-3 rounded-lg bg-gray-800/70 border ${
+                    className={`w-full px-4 py-3 rounded-xl bg-gray-50 border ${
                       formik.touched.message && formik.errors.message
-                        ? 'border-red-500 focus:ring-red-500'
-                        : 'border-gray-700 focus:ring-purple-500'
-                    } text-white focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-300`}
-                    variants={inputVariants}
-                    whileFocus="focus"
-                    initial="blur"
+                        ? 'border-red-400 focus:ring-red-300'
+                        : 'border-gray-200 focus:ring-gray-300'
+                    } text-gray-900 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-300`}
+                    whileFocus={{ scale: 1.005 }}
                   />
                   {formik.touched.message && formik.errors.message && (
                     <p className="mt-1 text-sm text-red-500">{formik.errors.message}</p>
@@ -384,34 +313,20 @@ const ContactSection: React.FC = () => {
 
                 <motion.button
                   type="submit"
-                  className="w-full py-3 px-4 bg-gradient-to-r from-purple-600 to-violet-800 rounded-lg text-white font-medium transition-all relative overflow-hidden shadow-lg hover:shadow-purple-500/20"
+                  className="w-full py-3 px-4 border border-black bg-gradient-to-r from-white to-gray-50 rounded-full text-black font-medium transition-all relative overflow-hidden shadow-md hover:scale-105 bg-white"
                   variants={itemVariants}
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.98 }}
                   disabled={formik.isSubmitting}
                 >
                   {formik.isSubmitting ? 'Sending...' : 'Send Message'}
+                  {/* <div className="absolute inset-0 bg-gradient-to-r from-gray-700 to-gray-800 opacity-0 hover:opacity-100 transition-opacity duration-300" /> */}
                 </motion.button>
               </motion.form>
             </motion.div>
           </div>
         </motion.div>
       </div>
-
-      {/* Simplified floating animation */}
-      <style jsx global>{`
-        @keyframes float {
-          0% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-10px);
-          }
-          100% {
-            transform: translateY(0px);
-          }
-        }
-      `}</style>
     </section>
   );
 };
