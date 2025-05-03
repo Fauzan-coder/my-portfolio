@@ -2,9 +2,9 @@ import React from 'react';
 
 const Projects = () => {
   return (
-    <section id="projects" className="py-24 bg-white font-['Arial']">
+    <section id="projects" className="py-24 bg-white font-poppins">
       <div className="container mx-auto px-4 max-w-7xl">
-      <h1 className="text-5xl md:text-6xl font-medium mb-12 font-['Anton'] relative">
+      <h1 className="text-5xl md:text-6xl font-medium mb-12 font-anton relative">
           <span className="bg-gradient-to-r from-black via-gray-500 to-gray-900 bg-clip-text text-transparent drop-shadow-lg animate-pulse">
             Projects
           </span>
@@ -23,7 +23,7 @@ const Projects = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-medium text-gray-900 font-['Anton']">Order Management System</h3>
+              <h3 className="text-lg font-medium text-gray-900 font-anton">Order Management System</h3>
             </div>
             
             <p className="text-gray-600 mb-6">A comprehensive order management solution with real-time tracking, inventory management, and customer communication tools.</p>
@@ -43,7 +43,7 @@ const Projects = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-medium text-gray-900 font-['Anton']">E-Commerce Solutions</h3>
+              <h3 className="text-lg font-medium text-gray-900 font-anton">E-Commerce Solutions</h3>
             </div>
             
             <p className="text-gray-600 mb-6">Flexible e-commerce platforms built to suit your budget and requirements, from custom builds to Shopify storefronts.</p>
@@ -63,7 +63,7 @@ const Projects = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-medium text-gray-900 font-['Anton']">Challan Management</h3>
+              <h3 className="text-lg font-medium text-gray-900 font-anton">Challan Management</h3>
             </div>
             
             <p className="text-gray-600 mb-6">A mobile application for efficient challan management, document handling, and payment processing with real-time updates.</p>
@@ -83,7 +83,7 @@ const Projects = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-medium text-gray-900 font-['Anton']">Employee Task Manager</h3>
+              <h3 className="text-lg font-medium text-gray-900 font-anton">Employee Task Manager</h3>
             </div>
             
             <p className="text-gray-600 mb-6">A comprehensive task management application for teams with performance tracking, deadline management, and progress visualization.</p>
@@ -109,7 +109,7 @@ const Projects = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-medium text-gray-900 font-['Anton']">CashSnap</h3>
+              <h3 className="text-xl font-medium text-gray-900 font-anton">CashSnap</h3>
             </div>
             
             <p className="text-gray-600 mb-8 max-w-3xl">

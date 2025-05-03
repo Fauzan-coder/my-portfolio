@@ -141,9 +141,8 @@ export default function DynamicHeroSection({ scrollY = 0 }: DynamicHeroSectionPr
             }}
           >
             <motion.h2 
-              className="text-xl md:text-2xl font-medium text-black tracking-wider w-full"
+              className="text-xl md:text-2xl font-medium text-black tracking-wider w-full font-poppins"
               variants={itemVariants}
-              style={{ fontFamily: "'Poppins', sans-serif" }}
             >
               Hello, I&apos;m Fauzan
             </motion.h2>
@@ -151,13 +150,12 @@ export default function DynamicHeroSection({ scrollY = 0 }: DynamicHeroSectionPr
             <div className="w-full h-auto overflow-visible" aria-live="polite">
               <motion.h1 
                 key={currentTextIndex}
-                className="text-5xl md:text-7xl lg:text-8xl font-bold text-left bg-clip-text text-transparent w-full break-words"
+                className="text-5xl md:text-7xl lg:text-8xl font-bold text-left bg-clip-text text-transparent w-full break-words font-anton"
                 initial="enter"
                 animate="center"
                 exit="exit"
                 variants={textVariants}
                 style={{ 
-                  fontFamily: "'Anton', sans-serif",
                   background: "linear-gradient(90deg, #000000, #1f2937, #000000, #4b5563, #000000, #1f2937)",
                   backgroundSize: "400% 100%",
                   backgroundClip: "text",
@@ -170,9 +168,8 @@ export default function DynamicHeroSection({ scrollY = 0 }: DynamicHeroSectionPr
             </div>
             
             <motion.p 
-              className="text-lg md:text-xl w-full text-black leading-relaxed"
+              className="text-lg md:text-xl w-full text-black leading-relaxed font-poppins"
               variants={itemVariants}
-              style={{ fontFamily: "'Poppins', sans-serif" }}
             >
               Crafting stunning digital experiences that merge artistic vision with technical precision
             </motion.p>
@@ -183,11 +180,10 @@ export default function DynamicHeroSection({ scrollY = 0 }: DynamicHeroSectionPr
             >
               <motion.a 
                 href="#projects" 
-                className="px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium text-black border-2 border-black transition-all duration-300 flex items-center"
+                className="px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium text-black border-2 border-black transition-all duration-300 flex items-center font-poppins"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
                 style={{ 
-                  fontFamily: "'Poppins', sans-serif",
                   background: "linear-gradient(90deg, #ffffff, #f3f4f6, #ffffff)",
                   backgroundSize: "200% 100%",
                   animation: "buttonGradient 5s ease infinite"
@@ -202,10 +198,9 @@ export default function DynamicHeroSection({ scrollY = 0 }: DynamicHeroSectionPr
               
               <motion.a 
                 href="#contact" 
-                className="px-8 py-4 bg-black text-white rounded-full font-medium border-2 border-black hover:bg-white hover:text-black transition-all duration-300"
+                className="px-8 py-4 bg-black text-white rounded-full font-medium border-2 border-black hover:bg-white hover:text-black transition-all duration-300 font-poppins"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
-                style={{ fontFamily: "'Poppins', sans-serif" }}
                 aria-label="Get in touch"
               >
                 Get in Touch

@@ -27,7 +27,17 @@ body {
   font-family: 'Anton', Arial, Helvetica, sans-serif;
 }
 
-/* Additional utility class for Anton font */
-.font-anton {
-  font-family: 'Anton', sans-serif;
+@layer base {
+  :root {
+    --font-anton: var(--font-anton);
+    --font-poppins: var(--font-poppins);
+  }
+  
+  .font-anton {
+    font-family: var(--font-anton);
+  }
+  
+  .font-poppins {
+    font-family: var(--font-poppins);
+  }
 }
