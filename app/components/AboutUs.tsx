@@ -158,7 +158,7 @@ export default function EnhancedAboutSection() {
           className="flex flex-col items-center mb-8 md:mb-16"
           style={{ opacity, scale }}
         >
-          <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl mb-6 md:mb-12 text-transparent bg-clip-text bg-gradient-to-r from-gray-700 via-gray-900 to-black font-['Anton'] text-center" 
+          <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl mb-6 md:mb-12 text-transparent bg-clip-text bg-gradient-to-r from-gray-700 via-gray-900 to-black font-anton text-center" 
           style={{
             textShadow: '0 0 15px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.2)'
           }}>
