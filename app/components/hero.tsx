@@ -41,8 +41,7 @@ export default function DynamicHeroSection({ scrollY = 0 }: DynamicHeroSectionPr
   const roles = [
     "Creative Developer",
     "Fullstack Engineer",
-    "Web Craftsman",
-    "Freelancer"
+    "Web Craftsman"
   ];
 
   useEffect(() => {
@@ -150,7 +149,7 @@ export default function DynamicHeroSection({ scrollY = 0 }: DynamicHeroSectionPr
             <div className="w-full h-auto overflow-visible" aria-live="polite">
               <motion.h1 
                 key={currentTextIndex}
-                className="text-5xl md:text-7xl lg:text-8xl font-bold text-left bg-clip-text text-transparent w-full break-words font-anton"
+                className="text-5xl sm:text-7xl md:text-8xl lg:text-8xl font-bold text-left bg-clip-text text-transparent w-full break-words font-anton"
                 initial="enter"
                 animate="center"
                 exit="exit"
