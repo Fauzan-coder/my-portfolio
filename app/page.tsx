@@ -29,8 +29,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Header */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-4  lg:px-8 relative z-10">
+      {/* Header */}
         <header className="flex justify-between items-center py-7 relative">
           <h1 className="text-2xl font-bold bg-gradient-to-r from-black via-gray-500 to-gray-900 bg-clip-text text-transparent">
             Fauzan Habib
