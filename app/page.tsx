@@ -31,41 +31,47 @@ export default function Home() {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
-        <header className="flex justify-between items-center py-6 relative">
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-fuchsia-500 to-purple-600 bg-clip-text text-transparent">
+        <header className="flex justify-between items-center py-7 relative">
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-black via-gray-500 to-gray-900 bg-clip-text text-transparent">
             Fauzan Habib
           </h1>
           <nav>
-            <ul className="flex space-x-8">
-              <li>
-                <a 
-                  href="#about" 
-                  className="hover:text-purple-400 transition-colors duration-300 relative group"
-                >
-                  About
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400 group-hover:w-full transition-all duration-300"></span>
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="#projects" 
-                  className="hover:text-purple-400 transition-colors duration-300 relative group"
-                >
-                  Projects
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400 group-hover:w-full transition-all duration-300"></span>
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="#contact" 
-                  className="hover:text-purple-400 transition-colors duration-300 relative group"
-                >
-                  Contact
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400 group-hover:w-full transition-all duration-300"></span>
-                </a>
-              </li>
-            </ul>
-          </nav>
+          <div className="flex justify-center">
+            <div className="rounded-full bg-gradient-to-r from-gray-800 via-gray-500 to-gray-900 p-1 shadow-lg relative overflow-hidden">
+          
+              <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-100 to-black opacity-50 blur-xl"></div>
+              
+              <div className="relative bg-gray-900 bg-opacity-80 backdrop-blur-sm rounded-full px-1 py-1 flex items-center">
+                <ul className="flex space-x-1">
+                  <li>
+                    <a 
+                      href="#about" 
+                      className="px-6 py-2 rounded-full transition-all duration-300 block text-white hover:bg-gradient-to-r hover:from-gray-800 hover:to-gray-500"
+                    >
+                      About
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                      href="#projects" 
+                      className="px-6 py-2 rounded-full transition-all duration-300 block text-white hover:bg-gradient-to-r hover:from-gray-800 hover:to-gray-500"
+                    >
+                      Projects
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                      href="#contact" 
+                      className="px-6 py-2 rounded-full transition-all duration-300 block text-white hover:bg-gradient-to-r hover:from-gray-800 hover:to-gray-500"
+                    >
+                      Contact
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </nav>
         </header>
 
         <DynamicHeroSection scrollY={scrollY} />
