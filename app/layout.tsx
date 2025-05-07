@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { anton, poppins } from "./font";
+import { Analytics } from "@vercel/analytics/react"
 import Head from "next/head";
 
 export const metadata: Metadata = {
@@ -19,6 +20,7 @@ export default function RootLayout({
       </Head>
       <body className={`${anton.variable} ${poppins.variable}`}>
         {children}
+        <Analytics />
       </body>
     </html>
   );
