@@ -5,7 +5,6 @@ export async function POST(request: Request) {
   try {
     const { name, email, message } = await request.json();
 
-    // Validate the input
     if (!name || !email || !message) {
       return NextResponse.json(
         { message: 'All fields are required' },
@@ -13,40 +12,46 @@ export async function POST(request: Request) {
       );
     }
 
-    // Create a Nodemailer transporter
+    const emailUser = process.env.EMAIL_USER;
+    const emailPassword = process.env.EMAIL_PASSWORD;
+
+    if (!emailUser || !emailPassword) {
+      console.error('Email env vars missing: set EMAIL_USER and EMAIL_PASSWORD in .env.local');
+      return NextResponse.json(
+        {
+          message:
+            'Email service is not configured. Please email fauzangolawala164@gmail.com directly.',
+        },
+        { status: 503 }
+      );
+    }
+
     const transporter = nodemailer.createTransport({
-      service: 'gmail', // Use your email service (e.g., Gmail, Outlook)
+      service: 'gmail',
       auth: {
-        user: process.env.EMAIL_USER, // Your email address
-        pass: process.env.EMAIL_PASSWORD, // Your email password or app-specific password
+        user: emailUser,
+        pass: emailPassword,
       },
-      
     });
 
-    // Email options
-    const mailOptions = {
-      from: process.env.EMAIL_USER, // Sender address
-      to: process.env.EMAIL_USER, // Receiver address (your email)
-      subject: `New Message from ${name} (${email})`,
-      text: message,
+    await transporter.sendMail({
+      from: emailUser,
+      to: emailUser,
+      replyTo: email,
+      subject: `Portfolio message from ${name} (${email})`,
+      text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
       html: `<p><strong>Name:</strong> ${name}</p>
              <p><strong>Email:</strong> ${email}</p>
-             <p><strong>Message:</strong> ${message}</p>`,
-    };
+             <p><strong>Message:</strong></p>
+             <p>${message.replace(/\n/g, '<br>')}</p>`,
+    });
 
-    // Send the email
-    await transporter.sendMail(mailOptions);
-
-    return NextResponse.json(
-      { message: 'Email sent successfully!' },
-      { status: 200 }
-    );
+    return NextResponse.json({ message: 'Email sent successfully!' }, { status: 200 });
   } catch (error) {
     console.error('Error sending email:', error);
     return NextResponse.json(
-      { message: 'Failed to send email' },
+      { message: 'Failed to send email. Please try again or contact me directly.' },
       { status: 500 }
     );
   }
 }
-

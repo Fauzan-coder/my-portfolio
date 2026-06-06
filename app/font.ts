@@ -1,7 +1,5 @@
-// app/fonts.ts
-import { Anton, Poppins } from 'next/font/google';
+import { Anton, Space_Grotesk } from 'next/font/google';
 
-// Load Anton font
 export const anton = Anton({
   weight: '400',
   subsets: ['latin'],
@@ -9,10 +7,9 @@ export const anton = Anton({
   variable: '--font-anton',
 });
 
-// Load Poppins font with multiple weights
-export const poppins = Poppins({
-  weight: ['400', '500', '600', '700'],
+export const spaceGrotesk = Space_Grotesk({
+  weight: ['300', '400', '500', '600', '700'],
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-poppins',
+  variable: '--font-space',
 });

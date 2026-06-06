@@ -1,151 +1,250 @@
-import React from 'react';
+"use client";
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const Projects = () => {
+const projects = [
+  {
+    id: '01',
+    name: 'Integrated Logistics Platform',
+    type: 'Enterprise · Multi-platform',
+    description:
+      'Full-stack supply chain solution — web order management with real-time inventory & a native Android field app with QR challan signing and instant sync.',
+    tags: ['Next.js', 'Node.js', 'AWS', 'PostgreSQL', 'Kotlin', 'Firebase'],
+    outcome: '60% reduction in order processing time',
+    bg: '#0c0600',
+    accent: '#ff6b00',
+  },
+  {
+    id: '02',
+    name: 'E-Commerce Solutions',
+    type: 'E-Commerce · Full-Service',
+    description:
+      'End-to-end storefronts across Shopify, WordPress/WooCommerce, and custom Next.js. Payment gateways (Razorpay, Stripe), cloud hosting, SEO-ready architecture.',
+    tags: ['Shopify', 'Next.js', 'Razorpay', 'Stripe', 'AWS', 'WooCommerce'],
+    outcome: '₹10L+ monthly transactions across live stores',
+    bg: '#00050f',
+    accent: '#2563eb',
+  },
+  {
+    id: '03',
+    name: 'Employee Task Manager',
+    type: 'Internal Tool · Enterprise',
+    description:
+      'Enterprise task platform for a 50+ person org. RBAC, priority-based assignment, deadline tracking, performance dashboards, automated weekly PDF reports.',
+    tags: ['React', 'Node.js', 'MongoDB', 'RBAC', 'PDF Generation'],
+    outcome: 'Adopted org-wide — 50+ active users',
+    bg: '#06000f',
+    accent: '#7c3aed',
+  },
+  {
+    id: '04',
+    name: 'CashSnap',
+    type: 'Proprietary Product · Live',
+    description:
+      'Retail finance tracker built from scratch and taken to market. Daily cash/UPI/card sales, expense tracking, salary advances, auto balance reports.',
+    tags: ['Next.js', 'Node.js', 'MongoDB', 'Vercel'],
+    outcome: 'Live with paying clients — try the demo',
+    bg: '#001208',
+    accent: '#10b981',
+    link: 'https://cashsnap-gold.vercel.app/',
+  },
+];
+
+function ProjectVisual({ project }: { project: (typeof projects)[0] }) {
   return (
-    <section id="projects" className="py-24 bg-white font-poppins">
-      <div className="container mx-auto px-4 max-w-7xl">
-      <h1 className="text-5xl md:text-6xl font-medium mb-12 font-anton relative">
-          <span className="bg-gradient-to-r from-black via-gray-500 to-gray-900 bg-clip-text text-transparent drop-shadow-lg animate-pulse">
-            Projects
+    <div className="w-full h-full relative overflow-hidden" style={{ background: project.bg }}>
+      {/* Gradient glow */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `radial-gradient(ellipse at 55% 40%, ${project.accent}25 0%, transparent 65%)`,
+        }}
+      />
+
+      {/* Large project number — watermark */}
+      <div
+        className="absolute bottom-4 right-6 font-bold leading-none select-none pointer-events-none"
+        style={{
+          fontSize: 'clamp(100px, 18vw, 180px)',
+          color: `${project.accent}0e`,
+          fontFamily: 'var(--font-anton, Anton, sans-serif)',
+        }}
+      >
+        {project.id}
+      </div>
+
+      {/* Abstract geometric lines */}
+      <svg
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        viewBox="0 0 500 500"
+        preserveAspectRatio="xMidYMid slice"
+        fill="none"
+      >
+        <line x1="0" y1="80" x2="500" y2="80" stroke={`${project.accent}08`} strokeWidth="0.5" />
+        <line x1="0" y1="160" x2="500" y2="160" stroke={`${project.accent}06`} strokeWidth="0.5" />
+        <line x1="80" y1="0" x2="80" y2="500" stroke={`${project.accent}06`} strokeWidth="0.5" />
+        <line x1="200" y1="0" x2="200" y2="500" stroke={`${project.accent}05`} strokeWidth="0.5" />
+        <line x1="350" y1="0" x2="350" y2="500" stroke={`${project.accent}04`} strokeWidth="0.5" />
+        <circle cx="250" cy="250" r="150" stroke={`${project.accent}08`} strokeWidth="0.5" strokeDasharray="6 4" />
+        <circle cx="250" cy="250" r="80" stroke={`${project.accent}06`} strokeWidth="0.5" />
+      </svg>
+
+      {/* Content */}
+      <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-between">
+        {/* Top: type tag */}
+        <div>
+          <span
+            className="inline-block text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-full"
+            style={{
+              background: `${project.accent}12`,
+              border: `1px solid ${project.accent}20`,
+              color: `${project.accent}80`,
+            }}
+          >
+            {project.type}
           </span>
-        </h1>
-        <p className="text-gray-700 text-lg mb-10 max-w-3xl font-bold">
-          I specialize in creating <span className="font-medium">custom software solutions</span> tailored 
-          precisely to client requirements.
-        </p>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Project 1 */}
-          <div className="bg-white border border-gray-800 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-6"> 
-            <div className="flex items-center mb-4">
-              <div className="w-10 h-10 flex items-center justify-center rounded-md bg-gray-100 mr-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-medium text-gray-900 font-anton">Order Management System</h3>
-            </div>
-            
-            <p className="text-gray-600 mb-6">A comprehensive order management solution with real-time tracking, inventory management, and customer communication tools.</p>
-            
-            <div className="flex flex-wrap gap-2">
-              <span className="text-xs px-3 py-1 bg-gray-100 text-gray-700 rounded-full">Next.js</span>
-              <span className="text-xs px-3 py-1 bg-gray-100 text-gray-700 rounded-full">React</span>
-              <span className="text-xs px-3 py-1 bg-gray-100 text-gray-700 rounded-full">Node.js</span>
-            </div>
-          </div>
-          
-          {/* Project 2 */}
-          <div className="bg-white border border-gray-800 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-6">
-            <div className="flex items-center mb-4">
-              <div className="w-10 h-10 flex items-center justify-center rounded-md bg-gray-100 mr-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-medium text-gray-900 font-anton">E-Commerce Solutions</h3>
-            </div>
-            
-            <p className="text-gray-600 mb-6">Flexible e-commerce platforms built to suit your budget and requirements, from custom builds to Shopify storefronts.</p>
-            
-            <div className="flex flex-wrap gap-2">
-              <span className="text-xs px-3 py-1 bg-gray-100 text-gray-700 rounded-full">Shopify</span>
-              <span className="text-xs px-3 py-1 bg-gray-100 text-gray-700 rounded-full">Next.js</span>
-              <span className="text-xs px-3 py-1 bg-gray-100 text-gray-700 rounded-full">Payment Gateways</span>
-            </div>
-          </div>
-          
-          {/* Project 3 */}
-          <div className="bg-white border border-gray-800 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-6">
-            <div className="flex items-center mb-4">
-              <div className="w-10 h-10 flex items-center justify-center rounded-md bg-gray-100 mr-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-medium text-gray-900 font-anton">Challan Management</h3>
-            </div>
-            
-            <p className="text-gray-600 mb-6">A mobile application for efficient challan management, document handling, and payment processing with real-time updates.</p>
-            
-            <div className="flex flex-wrap gap-2">
-              <span className="text-xs px-3 py-1 bg-gray-100 text-gray-700 rounded-full">Kotlin</span>
-              <span className="text-xs px-3 py-1 bg-gray-100 text-gray-700 rounded-full">Firebase</span>
-              <span className="text-xs px-3 py-1 bg-gray-100 text-gray-700 rounded-full">QR Codes</span>
-            </div>
-          </div>
-          
-          {/* Project 4 */}
-          <div className="bg-white border border-gray-800 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-6">
-            <div className="flex items-center mb-4">
-              <div className="w-10 h-10 flex items-center justify-center rounded-md bg-gray-100 mr-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-medium text-gray-900 font-anton">Employee Task Manager</h3>
-            </div>
-            
-            <p className="text-gray-600 mb-6">A comprehensive task management application for teams with performance tracking, deadline management, and progress visualization.</p>
-            
-            <div className="flex flex-wrap gap-2">
-              <span className="text-xs px-3 py-1 bg-gray-100 text-gray-700 rounded-full">React</span>
-              <span className="text-xs px-3 py-1 bg-gray-100 text-gray-700 rounded-full">Express</span>
-              <span className="text-xs px-3 py-1 bg-gray-100 text-gray-700 rounded-full">MongoDB</span>
-            </div>
-          </div>
+        {/* Bottom: details */}
+        <div>
+          <div className="w-8 h-px mb-4" style={{ background: `${project.accent}50` }} />
+          <h3
+            className="text-2xl md:text-3xl font-bold leading-tight mb-3"
+            style={{ color: '#fff' }}
+          >
+            {project.name}
+          </h3>
+          <p className="text-white/40 text-sm leading-relaxed mb-5 max-w-sm">
+            {project.description}
+          </p>
 
-          {/* CashSnap - Featured Product */}
-          <div className="md:col-span-2 border border-gray-800 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-8 relative">
-            <div className="absolute top-4 right-4">
-              <span className="text-xs font-medium px-3 py-1 bg-gray-200 text-gray-700 rounded-full">
-                Featured Product
+          <div className="flex flex-wrap gap-2 mb-4">
+            {project.tags.slice(0, 4).map((tag) => (
+              <span
+                key={tag}
+                className="px-2.5 py-1 text-[9px] uppercase tracking-wider rounded-full"
+                style={{
+                  background: `${project.accent}12`,
+                  border: `1px solid ${project.accent}20`,
+                  color: `${project.accent}80`,
+                }}
+              >
+                {tag}
               </span>
-            </div>
-            
-            <div className="flex items-center mb-6">
-              <div className="w-12 h-12 flex items-center justify-center rounded-md bg-gray-200 mr-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-medium text-gray-900 font-anton">CashSnap</h3>
-            </div>
-            
-            <p className="text-gray-600 mb-8 max-w-3xl">
-              CashSnap is my proprietary finance tracker designed specifically for retailers. It features comprehensive report generation capabilities and an intuitive dashboard to visualize key financial statistics and metrics.
+            ))}
+          </div>
+
+          <div className="flex items-center justify-between">
+            <p className="text-[10px] uppercase tracking-wider" style={{ color: `${project.accent}60` }}>
+              ↗ {project.outcome}
             </p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-              <div className="flex flex-wrap gap-2">
-                <span className="text-xs px-3 py-1 bg-gray-200 text-gray-700 rounded-full">Financial tracking</span>
-                <span className="text-xs px-3 py-1 bg-gray-200 text-gray-700 rounded-full">Sales analytics</span>
-              </div>
-              
-              <div className="flex flex-wrap gap-2">
-                <span className="text-xs px-3 py-1 bg-gray-200 text-gray-700 rounded-full">Report generation</span>
-              </div>
-              
-              <div className="flex flex-wrap gap-2">
-                <span className="text-xs px-3 py-1 bg-gray-200 text-gray-700 rounded-full">Various pricing</span>
-                <span className="text-xs px-3 py-1 bg-gray-200 text-gray-700 rounded-full">Customization</span>
-              </div>
-            </div>
-            
-            <a 
-              href="#contact" 
-              className="inline-flex items-center px-5 py-3 text-sm font-medium rounded-full bg-white text-black border border-black rounded-full hover:bg-white transition-all duration-300"
-            >
-              Contact for pricing
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </a>
+            {project.link && (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[10px] uppercase tracking-wider transition-colors"
+                style={{ color: project.accent }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                Live Demo →
+              </a>
+            )}
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+export default function Projects() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  return (
+    <section id="projects" className="bg-black border-t border-white/[0.06]">
+      {/* Header row */}
+      <div className="px-6 sm:px-10 md:px-14 flex items-center justify-between py-7 border-b border-white/[0.06]">
+        <p className="text-[10px] text-white/25 uppercase tracking-[0.3em] leading-relaxed">
+          Best<br />Cases
+        </p>
+        <p className="text-[10px] text-white/25 uppercase tracking-[0.3em] text-right leading-relaxed">
+          My<br />Projects
+        </p>
+      </div>
+
+      {/* Main: list + visual */}
+      <div className="flex flex-col md:flex-row min-h-[560px]">
+
+        {/* Left — project list */}
+        <div className="w-full md:w-[48%] px-6 sm:px-10 md:px-14 py-10 md:py-14 border-b md:border-b-0 md:border-r border-white/[0.06] flex flex-col justify-center">
+          {projects.map((project, i) => (
+            <motion.button
+              key={i}
+              className="group w-full text-left py-5 border-b border-white/[0.05] last:border-0"
+              onMouseEnter={() => setActiveIndex(i)}
+              onClick={() => setActiveIndex(i)}
+              whileHover={{}}
+            >
+              <div className="flex items-baseline gap-4">
+                <span
+                  className="text-[10px] tracking-wider transition-colors duration-200 flex-shrink-0 font-mono"
+                  style={{ color: activeIndex === i ? projects[i].accent : 'rgba(255,255,255,0.18)' }}
+                >
+                  {project.id}
+                </span>
+                <motion.span
+                  className="text-2xl sm:text-3xl md:text-[28px] lg:text-[34px] font-bold leading-tight transition-colors duration-200"
+                  style={{ color: activeIndex === i ? '#ffffff' : 'rgba(255,255,255,0.22)' }}
+                  animate={{ x: activeIndex === i ? 6 : 0 }}
+                  transition={{ duration: 0.2, ease: 'easeOut' }}
+                >
+                  {project.name}
+                </motion.span>
+              </div>
+
+              {/* Expanded type label */}
+              <AnimatePresence>
+                {activeIndex === i && (
+                  <motion.p
+                    className="text-[10px] uppercase tracking-[0.2em] pl-10 mt-1.5"
+                    style={{ color: project.accent + '60' }}
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {project.type}
+                  </motion.p>
+                )}
+              </AnimatePresence>
+            </motion.button>
+          ))}
+        </div>
+
+        {/* Right — project visual */}
+        <div className="w-full md:w-[52%] relative" style={{ minHeight: '420px' }}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeIndex}
+              className="absolute inset-0"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.35, ease: 'easeInOut' }}
+            >
+              <ProjectVisual project={projects[activeIndex]} />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+      </div>
+
+      {/* Bottom tagline */}
+      <div className="px-6 sm:px-10 md:px-14 py-6 border-t border-white/[0.06]">
+        <p className="text-[11px] text-white/20 leading-relaxed">
+          Full-stack solutions from concept<br />to production deployment.
+        </p>
+      </div>
     </section>
   );
-};
-
-export default Projects;
+}
