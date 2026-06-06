@@ -5,11 +5,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 const ROLES = ["Full-Stack Developer", "Cloud Architect", "AI Engineer"];
 
 export default function Hero() {
-  const [mounted, setMounted] = useState(false);
   const [roleIdx, setRoleIdx] = useState(0);
 
   useEffect(() => {
-    setMounted(true);
     const t = setInterval(() => setRoleIdx(i => (i + 1) % ROLES.length), 3200);
     return () => clearInterval(t);
   }, []);
@@ -45,7 +43,7 @@ export default function Hero() {
           <motion.div
             className="flex-shrink-0 md:w-[160px]"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: mounted ? 1 : 0, y: mounted ? 0 : 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.0, duration: 0.7, ease: 'easeOut' }}
           >
             <a href="#projects" className="group flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-3">
@@ -66,7 +64,7 @@ export default function Hero() {
           <motion.div
             className="flex-1 md:px-10 lg:px-16"
             initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: mounted ? 1 : 0, y: mounted ? 0 : 60 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
             <h1 className="text-[40px] sm:text-[54px] md:text-[64px] lg:text-[76px] xl:text-[90px] font-bold text-white leading-[0.88] tracking-[-0.02em]">
@@ -101,7 +99,7 @@ export default function Hero() {
           <motion.div
             className="flex-shrink-0 md:w-[220px] flex flex-row md:flex-col items-start gap-8 md:gap-6"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: mounted ? 1 : 0, y: mounted ? 0 : 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 0.7, ease: 'easeOut' }}
           >
             <div>

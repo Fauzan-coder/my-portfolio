@@ -48,12 +48,11 @@ function CursorGlow() {
 
 /* ── Scroll progress bar ────────────────────────────────── */
 function ScrollProgress({ scrollY }: { scrollY: number }) {
-  const [height, setHeight] = useState(1);
-
-  useEffect(() => {
-    const total = document.documentElement.scrollHeight - window.innerHeight;
-    setHeight(total > 0 ? (scrollY / total) * 100 : 0);
-  }, [scrollY]);
+  const total =
+    typeof document !== 'undefined'
+      ? document.documentElement.scrollHeight - window.innerHeight
+      : 0;
+  const height = total > 0 ? (scrollY / total) * 100 : 0;
 
   return (
     <div className="fixed top-0 left-0 right-0 h-[1px] z-[100] bg-white/[0.06]">
